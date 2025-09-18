@@ -23,6 +23,13 @@ let listaPessoas = [
 //#Busca
 // GET /pessoas
 router.get('/pessoas', (req, res, next) => {
+    // recebendo o ID como parametro dinâmico
+    const id = req.params.id
+    // faço a busca na lista de pessoas pelo id recebido
+    const pessoa = listaPessoas.find(pessoa => pessoa.id == id)
+    if(!pessoa){
+        return res.status(404).json({ error: "Pessoa não encontrada!!!" })
+    }
     res.json(listaPessoas)
 })
 
